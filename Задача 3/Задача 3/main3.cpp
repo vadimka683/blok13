@@ -2,30 +2,34 @@
 #include<vector>
 using namespace std;
 
-vector<int> input_numbers(vector<int> number) {
+void input_numbers(vector<int>& number) {
 	int old_number_id = 0;
 	int num;
 	int count = 0;
+	bool flag = false;
 	do {
 		if (count < 20) {
 			for (int i = 0; i < 20; i++) {
 				cout << "input number: ";
 				cin >> num;
+				if (num == -1) {
+					flag = true;
+					break;
+				}
 				number[i] = num;
 				count++;
 			}
+		}if (flag) {
+			break;
 		}
 		else {
-			if (old_number_id == 20) {
-				old_number_id = 0;
-			}
 			cout << "input number: ";
 			cin >> num;
 			if (num == -1) {
 				break;
 			}
 			number[old_number_id] = num;
-			old_number_id++;
+			old_number_id = (old_number_id + 1) % 20;
 		}
 	} while (true);
 
@@ -36,18 +40,13 @@ vector<int> input_numbers(vector<int> number) {
 	}else {
 		for (int i = 0; i < 20; i++) {
 			cout << number[old_number_id] << " ";
-			if (old_number_id == 19) {
-				old_number_id = 0;
-			}
-			else{
-				old_number_id++; 
-			}
+			old_number_id = (old_number_id + 1) % 20;
 		}
 	}
-	return number;
+	return;
 }
 
 int main() {
 	vector<int> numbers(20);
-	numbers = input_numbers(numbers);
+	input_numbers(numbers);
 }
