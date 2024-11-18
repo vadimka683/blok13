@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-float sum(vector<float> price, vector<int> items) {
+float sum(vector<float>& price, vector<int>& items) {
 	float sum_final = 0;
 	for (int i = 0; i < items.size(); i++) {
 		if (items[i] < price.size()) {
