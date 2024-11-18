@@ -15,40 +15,29 @@ vector<int> input_vector() {
 	}
 	return new_vector;
 }
-void read_vector(vector<int> array) {
+void read_vector(vector<int>& array) {
 	for (int i = 0; i < array.size(); i++) {
 		cout << array[i]<<" ";
 	}
 }
-vector<int> delete_number(vector<int> array) {
+void delete_number(vector<int>& array) {
 	cout << "Input number to delete: ";
 	int a;
 	cin >> a;
-	while (array[array.size() - 1] == a) {
-		array.pop_back();
-	}
-	bool flag;
-	do {
-		flag = false;
-		for (int i = 0; i < array.size(); i++) {
-			if (array[i] == a && i != array.size() && !flag) {
-				array[i] = array[i + 1];
-				flag = true;
+	for (int i = 0; i < array.size(); i++) {
+		if (array[i] == a) {
+			for (int j = i; j < array.size() - 1; j++) {
+				array[j] = array[j + 1];
 			}
-			else if (flag && i<array.size() - 1) {
-				array[i] = array[i + 1];
-			}
-		}
-		if (flag) {
 			array.pop_back();
+			i--;
 		}
 	}
-	while (flag);
-	return array;
+	return;
 }
 
 int main() {
 	vector<int> array = input_vector();
-	array = delete_number(array);
+	delete_number(array);
 	read_vector(array);
 }
